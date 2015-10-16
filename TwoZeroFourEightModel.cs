@@ -260,5 +260,24 @@ namespace twozerofoureight
             board = Random(board);
             NotifyAll();
         }
+
+        // Calculate Score
+        public int GetScore()
+        {
+            int score = 0;
+            int[] range = Enumerable.Range(0, boardSize).ToArray();
+            foreach (int x in range)
+            {
+                foreach (int y in range)
+                {
+                    if (board[x, y] != 0)
+                    {
+                        score += board[x, y];
+                    }
+                }
+            }
+            return score;
+        }
+
     }
 }
