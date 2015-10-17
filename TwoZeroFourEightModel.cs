@@ -11,6 +11,9 @@ namespace twozerofoureight
         protected int boardSize; // default is 4
         protected int[,] board;
         protected Random rand;
+        protected int score = 0;
+        protected bool isEnd = false;
+        //protected bool isFull = false;
 
         public TwoZeroFourEightModel() : this(4)
         {
@@ -21,6 +24,25 @@ namespace twozerofoureight
         {
             return board;
         }
+
+        public int GetScore()
+        {
+            return score;
+        }
+        /*
+        public bool GetisEnd()
+        {
+            return isEnd;
+        }
+        */
+
+        /*
+        public bool GetisFull()
+        {
+            return isFull;
+        }
+        */
+
 
         public TwoZeroFourEightModel(int size)
         {
@@ -39,13 +61,14 @@ namespace twozerofoureight
 
         private int[,] Random(int[,] input)
         {
-            while (true)
+            for(int i=0; i<boardSize*boardSize; i++)
             {
                 int x = rand.Next(boardSize);
                 int y = rand.Next(boardSize);
                 if (board[x, y] == 0)
                 {
                     board[x, y] = 2;
+                    score += 2;
                     break;
                 }
             }
@@ -259,25 +282,36 @@ namespace twozerofoureight
             }
             board = Random(board);
             NotifyAll();
-        }
+        }      
 
-        // Calculate Score
-        public int GetScore()
+        public bool CheckStatus()
         {
-            int score = 0;
-            int[] range = Enumerable.Range(0, boardSize).ToArray();
-            foreach (int x in range)
+            isEnd = true;
+            //isFull = true;
+            for (int i=0; i<boardSize-1; i++)
             {
-                foreach (int y in range)
+                for(int j=0; j<boardSize-1; j++)
                 {
-                    if (board[x, y] != 0)
+                    if (board[i, j] == 0)
                     {
-                        score += board[x, y];
+                        //isFull = false;
+                        isEnd = false;
+                        break;
+                    }
+                    if (board[i,j] == board[i, j + 1])
+                    {
+                        isEnd = false;
+                        break;
+                    }
+                    if (board[i, j] == board[i+1, j])
+                    {
+                        isEnd = false;
+                        break;
                     }
                 }
+                if (!isEnd){break;}
             }
-            return score;
+            return isEnd;
         }
-
     }
 }
