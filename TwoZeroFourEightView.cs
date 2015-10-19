@@ -22,9 +22,9 @@ namespace twozerofoureight
             model = new TwoZeroFourEightModel();
             model.AttachObserver(this);
 
-            ScoreVeiw = new TwoZeroFourEightScoreView(); 
+            ScoreVeiw = new TwoZeroFourEightScoreView();
             ScoreVeiw.Visible = false;
-            ScoreVeiw.Enabled = true; 
+            ScoreVeiw.Enabled = false;
 
             controller = new TwoZeroFourEightController();
             controller.AddModel(model);
@@ -35,9 +35,10 @@ namespace twozerofoureight
         {
             UpdateBoard(((TwoZeroFourEightModel) m).GetBoard());
             UpdateScore(((TwoZeroFourEightModel)m).GetScore());
-            ScoreVeiw.UpdateScoreView(((TwoZeroFourEightModel)m).GetScore());
-            if (((TwoZeroFourEightModel)m).CheckStatus())
+            if (((TwoZeroFourEightModel)m).CheckIsEnd())
             {
+                ScoreVeiw.Enabled = true;
+                ScoreVeiw.UpdateScoreView(((TwoZeroFourEightModel)m).GetScore());
                 this.Visible = false;
                 ScoreVeiw.Visible = true;
             }

@@ -10,15 +10,19 @@ using System.Windows.Forms;
 
 namespace twozerofoureight
 {
-    public partial class TwoZeroFourEightScoreView : Form, View
+    public partial class TwoZeroFourEightScoreView : Form
     {
-
         public TwoZeroFourEightScoreView()
         {
             InitializeComponent();
         }
 
         private void TwoZeroFourEightScoreView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblscore2_Click(object sender, EventArgs e)
         {
 
         }
@@ -32,5 +36,6 @@ namespace twozerofoureight
         {
             lblscore2.Text = "Score : " + score;
         }
+
     }
 }
