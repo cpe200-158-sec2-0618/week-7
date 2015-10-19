@@ -13,7 +13,6 @@ namespace twozerofoureight
         protected Random rand;
         protected int score = 0;
         protected bool isEnd = false; 
-        protected bool isFull = false; 
 
         public TwoZeroFourEightModel() : this(4)
         {
@@ -34,13 +33,7 @@ namespace twozerofoureight
         { 
             this.CheckIsEnd(); 
             return isEnd; 
-        } 
-
-        public bool GetIsFull() 
-        { 
-            return isFull; 
-        } 
-
+        }  
 
         public TwoZeroFourEightModel(int size)
         {
@@ -68,14 +61,9 @@ namespace twozerofoureight
                 {
                     board[x, y] = 2;
                     score += 2;
-                    isFull = false;
                     break;
                 }
             }
-            if (i >= boardSize * boardSize) 
-            { 
-                isFull = true; 
-            } 
             return input; 
         }
 
@@ -290,34 +278,31 @@ namespace twozerofoureight
 
         public bool CheckIsEnd() 
         {
-            if (this.GetIsFull()) 
+            isEnd = true; 
+            for (int i = 0; i < boardSize; i++) 
             {
-                isEnd = true; 
-                for (int i = 0; i < boardSize; i++) 
+                for (int j = 0; j < boardSize - 1; j++) 
                 {
-                    for (int j = 0; j < boardSize - 1; j++) 
+                    if (board[i , j] == board[i , j + 1] || board[i , j] == 0 || board[i , j + 1] == 0)
                     {
-                        if (board[i , j] == board[i , j + 1] || board[i , j] == 0 || board[i , j + 1] == 0)
-                        {
-                            isEnd = false;
-                            break;
-                        }
+                        isEnd = false;
+                        break;
                     }
-                    if (!isEnd) { break; } 
                 }
-                for (int j = 0; j < boardSize; j++) 
+                if (!isEnd) { break; } 
+            }
+            for (int j = 0; j < boardSize; j++) 
+            {
+                if (!isEnd) { break; }
+                for (int i = 0; i < boardSize - 1; i++) 
                 {
-                    if (!isEnd) { break; }
-                    for (int i = 0; i < boardSize - 1; i++) 
+                    if (board[i , j] == board[i + 1 , j] || board[i , j] == 0 || board[i + 1 , j] == 0)
                     {
-                        if (board[i , j] == board[i + 1 , j] || board[i , j] == 0 || board[i + 1 , j] == 0)
-                        {
-                            isEnd = false;
-                            break;
-                        }
+                        isEnd = false;
+                        break;
                     }
-                } 
-            } 
+                }
+            }  
             return isEnd; 
         }
 
