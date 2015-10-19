@@ -12,8 +12,8 @@ namespace twozerofoureight
         protected int[,] board;
         protected Random rand;
         protected int score = 0;
-        protected bool isEnd = false;
-        protected bool isFull = false;
+        protected bool isEnd = false; 
+        protected bool isFull = false; 
 
         public TwoZeroFourEightModel() : this(4)
         {
@@ -30,16 +30,16 @@ namespace twozerofoureight
             return score;
         }
 
-        public bool GetIsEnd()
-        {
-            this.CheckIsEnd();
-            return isEnd;
-        }
+        public bool GetIsEnd() 
+        { 
+            this.CheckIsEnd(); 
+            return isEnd; 
+        } 
 
-        public bool GetIsFull()
-        {
-            return isFull;
-        }
+        public bool GetIsFull() 
+        { 
+            return isFull; 
+        } 
 
 
         public TwoZeroFourEightModel(int size)
@@ -59,8 +59,8 @@ namespace twozerofoureight
 
         private int[,] Random(int[,] input)
         {
-            int i = 0;
-            for (i = 0; i < boardSize * boardSize; i++)
+            int i = 0; 
+            for (i = 0; i < boardSize * boardSize; i++) 
             {
                 int x = rand.Next(boardSize);
                 int y = rand.Next(boardSize);
@@ -68,14 +68,15 @@ namespace twozerofoureight
                 {
                     board[x, y] = 2;
                     score += 2;
+                    isFull = false;
                     break;
                 }
             }
-            if (i >= boardSize * boardSize)
-            {
-                isFull = true;
-            }
-            return input;
+            if (i >= boardSize * boardSize) 
+            { 
+                isFull = true; 
+            } 
+            return input; 
         }
 
         public void PerformDown()
@@ -286,38 +287,38 @@ namespace twozerofoureight
             board = Random(board);
             NotifyAll();
         }
-            
-        public bool CheckIsEnd()
+
+        public bool CheckIsEnd() 
         {
-            if (this.GetIsFull())
+            if (this.GetIsFull()) 
             {
-                isEnd = true;
-                for (int i = 0; i < boardSize; i++)
+                isEnd = true; 
+                for (int i = 0; i < boardSize; i++) 
                 {
-                    for (int j = 0; j < boardSize - 1; j++)
+                    for (int j = 0; j < boardSize - 1; j++) 
                     {
-                        if (board[i, j] == board[i, j + 1] || board[i, j] == 0 || board[i, j + 1] == 0)
+                        if (board[i , j] == board[i , j + 1] || board[i , j] == 0 || board[i , j + 1] == 0)
                         {
                             isEnd = false;
                             break;
                         }
                     }
-                    if (!isEnd) { break; }
+                    if (!isEnd) { break; } 
                 }
-                for (int j = 0; j < boardSize; j++)
+                for (int j = 0; j < boardSize; j++) 
                 {
                     if (!isEnd) { break; }
-                    for (int i = 0; i < boardSize - 1; i++)
+                    for (int i = 0; i < boardSize - 1; i++) 
                     {
-                        if (board[i, j] == board[i + 1, j] || board[i, j] == 0 || board[i + 1, j] == 0)
+                        if (board[i , j] == board[i + 1 , j] || board[i , j] == 0 || board[i + 1 , j] == 0)
                         {
                             isEnd = false;
                             break;
                         }
                     }
-                }
-            }
-            return isEnd;
+                } 
+            } 
+            return isEnd; 
         }
 
     }

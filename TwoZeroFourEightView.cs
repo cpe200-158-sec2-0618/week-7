@@ -24,7 +24,7 @@ namespace twozerofoureight
 
             ScoreVeiw = new TwoZeroFourEightScoreView();
             ScoreVeiw.Visible = false;
-            ScoreVeiw.Enabled = false;
+            ScoreVeiw.Enabled = false; 
 
             controller = new TwoZeroFourEightController();
             controller.AddModel(model);
@@ -35,13 +35,13 @@ namespace twozerofoureight
         {
             UpdateBoard(((TwoZeroFourEightModel) m).GetBoard());
             UpdateScore(((TwoZeroFourEightModel)m).GetScore());
-            if (((TwoZeroFourEightModel)m).CheckIsEnd())
-            {
-                ScoreVeiw.Enabled = true;
-                ScoreVeiw.UpdateScoreView(((TwoZeroFourEightModel)m).GetScore());
-                this.Visible = false;
-                ScoreVeiw.Visible = true;
-            }
+            if (((TwoZeroFourEightModel)m).CheckIsEnd()) 
+            { 
+                ScoreVeiw.Enabled = true; 
+                ScoreVeiw.UpdateScoreView(((TwoZeroFourEightModel)m).GetScore()); 
+                this.Visible = false; 
+                ScoreVeiw.Visible = true; 
+            } 
         }
 
         private void UpdateTile(Label l, int i)
@@ -91,10 +91,10 @@ namespace twozerofoureight
             UpdateTile(lbl33,board[3, 3]);
         }
 
-        private void UpdateScore(int score)
-        {
-            lblscore.Text = "Score : " + score;
-        }
+        private void UpdateScore(int score) 
+        { 
+            lblscore.Text = "Score : " + score; 
+        } 
 
         private void btnLeft_Click(object sender, EventArgs e)
         {
